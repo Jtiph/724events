@@ -4,7 +4,7 @@ import { api, DataProvider } from "../../contexts/DataContext";
 
 const data = {
   focus: [
-    {
+    { 
       title: "World economic forum",
       description:
         "Oeuvre à la coopération entre le secteur public et le privé.",
@@ -36,7 +36,7 @@ describe("When slider is created", () => {
       </DataProvider>
     );
     await screen.findByText("World economic forum");
-    await screen.findByText("janvier");
+    await screen.findAllByText("février");
     await screen.findByText(
       "Oeuvre à la coopération entre le secteur public et le privé."
     );

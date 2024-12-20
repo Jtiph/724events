@@ -13,7 +13,15 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const {data} = useData(); // récup le dernier events dans les data 
+  
+  // calcul du dernier event en comparant chaque date avec reduce en initilisant à la 1ere date donc à 0
+  const last = data?.events?.reduce((latest, current) => {
+    const latestDate = new Date(latest.date); // désigne la dernière date trouvée ou comparé
+    const currentDate = new Date(current.date); // désigne la date actuelle, date récente comparé 
+    return currentDate > latestDate ? current : latest; // si la date actuelle est plus grande que la dernière date trouvée alors on affiche current(date récente trouvée) sinon latest(derniere date trouvée)
+  }, data.events[0]); 
+
   return <>
     <header>
       <Menu />
@@ -23,7 +31,7 @@ const Page = () => {
         <Slider />
       </section>
       <section className="ServicesContainer">
-        <h2 className="Title">Nos services</h2>
+        <h2 className="Title" id="nos-services">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
           <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
@@ -52,11 +60,11 @@ const Page = () => {
         </div>
       </section>
       <section className="EventsContainer">
-        <h2 className="Title">Nos réalisations</h2>
+        <h2 className="Title" id="nos-realisations">Nos réalisations</h2>
         <EventList />
       </section>
       <section className="PeoplesContainer">
-        <h2 className="Title">Notre équipe</h2>
+        <h2 className="Title" id="notre-equipe">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
           <PeopleCard
@@ -116,13 +124,18 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
-          small
-          label="boom"
-        />
+        {last ? ( // condition pour afficher le dernier event
+            <EventCard
+            imageSrc={last?.cover}
+            title={last?.title}
+            date={new Date(last?.date)}
+            small
+            label="boom"
+          />
+        ) 
+      : (<p>Aucune presation récente disponible</p>
+        // affiche un message si aucun event est dispo
+      )}    
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
