@@ -36,7 +36,7 @@ describe("When slider is created", () => {
       </DataProvider>
     );
     await screen.findByText("World economic forum");
-    await screen.findAllByText("février");
+    await screen.findAllByText("janvier");
     await screen.findByText(
       "Oeuvre à la coopération entre le secteur public et le privé."
     );
