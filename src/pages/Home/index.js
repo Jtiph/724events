@@ -13,7 +13,8 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {data} = useData(); // récup le dernier events dans les data 
+  // récup le dernier events dans les data 
+  const {data} = useData(); 
   
   // calcul du dernier event en comparant chaque date avec reduce en initilisant à la 1ere date donc à 0
   const last = data?.events?.reduce((latest, current) => {

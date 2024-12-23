@@ -14,9 +14,11 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const filteredEvents = (
+    // ajout du filtre en fonction du type, si type est vrai(pas de caté selectionée) alors tous est renvoyé 
+    // sinon on filtre les events pour afficher celui avec le type qui correspond
     (!type
       ? data?.events
-      : data?.events) || []
+      : data?.events.filter((event)=> event.type === type)) || [] // changement ici avec le filtre en plus
   ).filter((event, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
