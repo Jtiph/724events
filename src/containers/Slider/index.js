@@ -7,7 +7,7 @@ import "./style.scss";
 const Slider = () => {
   /* stock et initialise à 0 */
   const { data } = useData();
-  const [index, setIndex] = useState(false);
+  const [index, setIndex] = useState(0);
   /* trie les events par ordre décroissante */
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? 1 : -1 // inversement du 1 et -1 pour mettre de la plus ancienne à la récente
